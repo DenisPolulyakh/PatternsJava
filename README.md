@@ -34,7 +34,8 @@
 
 [Пример паттерна тут](/src/main/java/it/polulyakh/patterns/fabricmethod/FabricMethod.java)
 
-Диаграмма классов  паттерна тут
+Диаграмма классов  паттерна
+
 ![FabricMethod.jpg](src%2Fmain%2Fresources%2FFabricMethod.jpg)
 
 
