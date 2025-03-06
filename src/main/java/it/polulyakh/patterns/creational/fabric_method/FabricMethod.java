@@ -1,6 +1,4 @@
-package it.polulyakh.patterns.fabricmethod;
-
-import java.util.Arrays;
+package it.polulyakh.patterns.creational.fabric_method;
 
 public class FabricMethod {
 
@@ -13,13 +11,6 @@ public class FabricMethod {
     }
 
 
-}
-
-/**
- * Интерфейс валюты, каждая валюта должна его реализовать
- */
-interface Currency {
-    String getCurrencySymbol();
 }
 
 
@@ -43,13 +34,6 @@ class Euro implements Currency {
         return "EUR";
     }
 
-}
-
-/**
- * Интерфейс создателя, конкретный создатель должен реализовать метод
- */
-interface CreatorCurrency {
-    Currency createCurrency();
 }
 
 class EuroCreator implements CreatorCurrency {

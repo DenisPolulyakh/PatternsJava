@@ -32,7 +32,7 @@
 1. Увеличивает объем кода, как обычно.
 2. Для каждого класса продукта, создается класс создателя. Можно "нахуевертить" много одинаковых классов, если лень читать документацию или её тупо нет.
 
-[Пример паттерна тут](/src/main/java/it/polulyakh/patterns/fabricmethod/FabricMethod.java)
+[Пример паттерна тут](/it/polulyakh/patterns/сreational/fabric_method/FabricMethod.java)
 
 Диаграмма классов  паттерна тут
 ![FabricMethod.jpg](src%2Fmain%2Fresources%2FFabricMethod.jpg)
