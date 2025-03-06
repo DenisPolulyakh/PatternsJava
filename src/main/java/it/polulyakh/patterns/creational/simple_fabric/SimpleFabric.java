@@ -3,7 +3,7 @@ package it.polulyakh.patterns.creational.simple_fabric;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main_Simple_Fabric {
+public class SimpleFabric {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<Employee>();
         //Создали фабрику
