@@ -2,8 +2,9 @@ package it.polulyakh.patterns;
 
 import it.polulyakh.patterns.creational.abstract_fabric.DoorFactory;
 import it.polulyakh.patterns.creational.abstract_fabric.IronDoorFactory;
-import it.polulyakh.patterns.creational.abstract_fabric.WoodenDoorFactory;
 import it.polulyakh.patterns.creational.builder.Person;
+import it.polulyakh.patterns.creational.prototype.Human;
+import it.polulyakh.patterns.creational.prototype.Passport;
 import it.polulyakh.patterns.creational.simple_fabric.Employee;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeFactory;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeType;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CheckPatterns {
 
@@ -59,5 +61,13 @@ public class CheckPatterns {
         assertEquals("Железная дверь", doorFactory.createDoor().getDescription());
         assertEquals("Я мастер по железным дверям", doorFactory.createFittingExpert().doorFitting());
 
+    }
+
+    @Test
+    public void checkPrototype() throws CloneNotSupportedException {
+        Passport passport = new Passport("6304","3423525");
+        Human human = new Human("Ваня", 18, passport);
+        Human human2= human.clone();
+        assertNotEquals(human2.getPassport(), human.getPassport());
     }
 }
