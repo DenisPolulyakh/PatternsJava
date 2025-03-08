@@ -1,8 +1,8 @@
-package it.polulyakh.patterns.builder;
+package it.polulyakh.patterns.creational.builder;
 
-import it.polulyakh.patterns.builder.enums.RobotBrain;
-import it.polulyakh.patterns.builder.enums.RobotWeapon;
-import it.polulyakh.patterns.builder.enums.RobotСhassisType;
+import it.polulyakh.patterns.creational.builder.enums.RobotBrain;
+import it.polulyakh.patterns.creational.builder.enums.RobotWeapon;
+import it.polulyakh.patterns.creational.builder.enums.RobotChassisType;
 
 import java.util.Arrays;
 
@@ -10,7 +10,7 @@ public class Robot {
 
     private final static int MAX_WEAPON = 4;
     //Шасси
-    private RobotСhassisType chassi;
+    private RobotChassisType chassi;
     //Оружие
     private RobotWeapon[] weapons = new RobotWeapon[MAX_WEAPON];
     //Процессор
@@ -22,7 +22,7 @@ public class Robot {
     }
 
 
-    public RobotСhassisType getChassi() {
+    public RobotChassisType getChassi() {
         return chassi;
     }
 
@@ -66,7 +66,7 @@ public class Robot {
         private RobotBuilder() {
         }
 
-        public RobotBuilder addChassi(RobotСhassisType chassi) {
+        public RobotBuilder addChassi(RobotChassisType chassi) {
             Robot.this.chassi = chassi;
             return this;
         }

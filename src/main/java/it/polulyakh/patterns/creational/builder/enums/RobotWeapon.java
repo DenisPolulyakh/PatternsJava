@@ -1,4 +1,4 @@
-package it.polulyakh.patterns.builder.enums;
+package it.polulyakh.patterns.creational.builder.enums;
 
 public enum RobotWeapon {
     GUN,
