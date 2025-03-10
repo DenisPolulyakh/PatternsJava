@@ -11,9 +11,15 @@ import it.polulyakh.patterns.creational.simple_fabric.EmployeeType;
 import it.polulyakh.patterns.creational.singleton.SimpleSingleton;
 import it.polulyakh.patterns.structured.adapter.CardReader;
 import it.polulyakh.patterns.structured.adapter.MemoryCard;
+import it.polulyakh.patterns.structured.decorator.SimpleCar;
+import it.polulyakh.patterns.structured.decorator.SportCar;
+import it.polulyakh.patterns.structured.facade.ShapeFacade;
+import it.polulyakh.patterns.structured.proxy.CurrencyRateService;
+import it.polulyakh.patterns.structured.proxy.CurrencyRateServiceProxy;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,5 +85,32 @@ public class CheckPatterns {
         MemoryCard memoryCard = new MemoryCard();
         CardReader cardReader = new CardReader(memoryCard);
         cardReader.connectWithUsbCable();
+    }
+
+    @Test
+    public void checkDecorator(){
+        SimpleCar simpleCar = new SimpleCar();
+        assertEquals(100,simpleCar.getSpeed());
+        SportCar sportCar = new SportCar(simpleCar);
+        assertEquals(150, sportCar.getSpeed());
+    }
+
+    @Test
+    public void checkFacade(){
+        ShapeFacade shapeFacade = new ShapeFacade();
+        assertEquals("Circle drawing...", shapeFacade.draw("CIRCLE"));
+        assertEquals("Unknown shape", shapeFacade.draw("big dick"));
+
+    }
+
+    @Test
+    public void checkProxy(){
+        Currency currency = Currency.getInstance("USD");
+        CurrencyRateService currencyRateService = new CurrencyRateServiceProxy();
+        double firstRequestRate = currencyRateService.getDailyCurrencyRate(currency);
+        System.out.println(firstRequestRate);
+        assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
+        assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
+        assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
     }
 }
