@@ -1,5 +1,9 @@
 package it.polulyakh.patterns;
 
+import it.polulyakh.patterns.behavioral.chain.Handler;
+import it.polulyakh.patterns.behavioral.chain.Order;
+import it.polulyakh.patterns.behavioral.chain.Repeater;
+import it.polulyakh.patterns.behavioral.chain.Taxi;
 import it.polulyakh.patterns.creational.abstract_fabric.DoorFactory;
 import it.polulyakh.patterns.creational.abstract_fabric.IronDoorFactory;
 import it.polulyakh.patterns.creational.builder.Person;
@@ -56,7 +60,7 @@ public class CheckPatterns {
     }
 
     @Test
-    public void checkSingleton(){
+    public void checkSingleton() {
         SimpleSingleton singleton = SimpleSingleton.getInstance();
         SimpleSingleton singleton2 = SimpleSingleton.getInstance();
         assertEquals(singleton, singleton2);
@@ -64,7 +68,7 @@ public class CheckPatterns {
 
 
     @Test
-    public void checkAbstractFabric(){
+    public void checkAbstractFabric() {
         DoorFactory doorFactory = new IronDoorFactory();
         assertEquals("Железная дверь", doorFactory.createDoor().getDescription());
         assertEquals("Я мастер по железным дверям", doorFactory.createFittingExpert().doorFitting());
@@ -73,30 +77,30 @@ public class CheckPatterns {
 
     @Test
     public void checkPrototype() throws CloneNotSupportedException {
-        Passport passport = new Passport("6304","3423525");
+        Passport passport = new Passport("6304", "3423525");
         Human human = new Human("Ваня", 18, passport);
-        Human human2= human.clone();
+        Human human2 = human.clone();
         assertNotEquals(human2.getPassport(), human.getPassport());
     }
 
 
     @Test
-    public void checkAdapter(){
+    public void checkAdapter() {
         MemoryCard memoryCard = new MemoryCard();
         CardReader cardReader = new CardReader(memoryCard);
         cardReader.connectWithUsbCable();
     }
 
     @Test
-    public void checkDecorator(){
+    public void checkDecorator() {
         SimpleCar simpleCar = new SimpleCar();
-        assertEquals(100,simpleCar.getSpeed());
+        assertEquals(100, simpleCar.getSpeed());
         SportCar sportCar = new SportCar(simpleCar);
         assertEquals(150, sportCar.getSpeed());
     }
 
     @Test
-    public void checkFacade(){
+    public void checkFacade() {
         ShapeFacade shapeFacade = new ShapeFacade();
         assertEquals("Circle drawing...", shapeFacade.draw("CIRCLE"));
         assertEquals("Unknown shape", shapeFacade.draw("big dick"));
@@ -104,7 +108,7 @@ public class CheckPatterns {
     }
 
     @Test
-    public void checkProxy(){
+    public void checkProxy() {
         Currency currency = Currency.getInstance("USD");
         CurrencyRateService currencyRateService = new CurrencyRateServiceProxy();
         double firstRequestRate = currencyRateService.getDailyCurrencyRate(currency);
@@ -112,5 +116,18 @@ public class CheckPatterns {
         assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
         assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
         assertEquals(firstRequestRate, currencyRateService.getDailyCurrencyRate(currency));
+    }
+
+    @Test
+    public void checkChain() {
+        Handler handler = new Repeater();
+        handler.bind(new Taxi("С456УК88"))
+                .bind(new Taxi("С457УК88"))
+                .bind(new Taxi("С458УК88"))
+                .bind(new Taxi("С459УК88"))
+                .bind(new Taxi("С460УК88"))
+                .bind(handler);
+        Order  order = new Order("#1");
+        handler.handle(order);
     }
 }
