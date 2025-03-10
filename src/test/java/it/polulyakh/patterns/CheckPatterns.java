@@ -9,6 +9,8 @@ import it.polulyakh.patterns.creational.simple_fabric.Employee;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeFactory;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeType;
 import it.polulyakh.patterns.creational.singleton.SimpleSingleton;
+import it.polulyakh.patterns.structured.adapter.CardReader;
+import it.polulyakh.patterns.structured.adapter.MemoryCard;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -69,5 +71,13 @@ public class CheckPatterns {
         Human human = new Human("Ваня", 18, passport);
         Human human2= human.clone();
         assertNotEquals(human2.getPassport(), human.getPassport());
+    }
+
+
+    @Test
+    public void checkAdapter(){
+        MemoryCard memoryCard = new MemoryCard();
+        CardReader cardReader = new CardReader(memoryCard);
+        cardReader.connectWithUsbCable();
     }
 }
