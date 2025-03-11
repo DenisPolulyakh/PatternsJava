@@ -4,6 +4,12 @@ import it.polulyakh.patterns.behavioral.chain.Handler;
 import it.polulyakh.patterns.behavioral.chain.Order;
 import it.polulyakh.patterns.behavioral.chain.Repeater;
 import it.polulyakh.patterns.behavioral.chain.Taxi;
+import it.polulyakh.patterns.behavioral.observer.Channel;
+import it.polulyakh.patterns.behavioral.observer.NewsChannel;
+import it.polulyakh.patterns.behavioral.observer.NewsPortal;
+import it.polulyakh.patterns.behavioral.template.OK;
+import it.polulyakh.patterns.behavioral.template.SocialNetwork;
+import it.polulyakh.patterns.behavioral.template.VK;
 import it.polulyakh.patterns.creational.abstract_fabric.DoorFactory;
 import it.polulyakh.patterns.creational.abstract_fabric.IronDoorFactory;
 import it.polulyakh.patterns.creational.builder.Person;
@@ -129,5 +135,25 @@ public class CheckPatterns {
                 .bind(handler);
         Order  order = new Order("#1");
         handler.handle(order);
+    }
+
+
+    @Test
+    public void checkTemplate(){
+        SocialNetwork socialNetwork = new VK("ivan","sdf32423");
+        socialNetwork.createPost("Котята мяукают");
+        socialNetwork = new OK("ivan","1342r4df");
+        socialNetwork.createPost("Утки крякают");
+    }
+
+    @Test
+    public void checkObserver(){
+        Channel channelWolf = new NewsChannel("Cерый волк");
+        Channel threePig = new NewsChannel("Три поросенка");
+        NewsPortal portal = new NewsPortal();
+        portal.add(channelWolf);
+        portal.add(threePig);
+        portal.sendNews("Правительство расширяет программу ипотеки на дома из листьев, но на дома из кирпичей это не распространяется");
+
     }
 }
