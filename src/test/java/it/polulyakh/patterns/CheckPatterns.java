@@ -18,7 +18,12 @@ import it.polulyakh.patterns.creational.prototype.Passport;
 import it.polulyakh.patterns.creational.simple_fabric.Employee;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeFactory;
 import it.polulyakh.patterns.creational.simple_fabric.EmployeeType;
+import it.polulyakh.patterns.creational.singleton.HolderSingleton;
 import it.polulyakh.patterns.creational.singleton.SimpleSingleton;
+import it.polulyakh.patterns.deepseek.builder.Computer;
+import it.polulyakh.patterns.deepseek.fabric_method.Notification;
+import it.polulyakh.patterns.deepseek.fabric_method.PushNotification;
+import it.polulyakh.patterns.deepseek.fabric_method.PushNotificationFactory;
 import it.polulyakh.patterns.structured.adapter.CardReader;
 import it.polulyakh.patterns.structured.adapter.MemoryCard;
 import it.polulyakh.patterns.structured.decorator.SimpleCar;
@@ -155,5 +160,50 @@ public class CheckPatterns {
         portal.add(threePig);
         portal.sendNews("Правительство расширяет программу ипотеки на дома из листьев, но на дома из кирпичей это не распространяется");
 
+    }
+
+    @Test
+    public void checkSingletonHolder(){
+        HolderSingleton singleton = HolderSingleton.getInstance();
+        HolderSingleton singleton2 = HolderSingleton.getInstance();
+        assertEquals(singleton, singleton2);
+    }
+
+    @Test
+    public void checkBuilderComputer(){
+        Computer gamingPC = new Computer.Builder("Intel Core i7-12700K", 32)
+                .storage(2000)
+                .storageType("SSD")
+                .graphicsCard("NVIDIA RTX 4080")
+                .hasWifi(true)
+                .hasBluetooth(true)
+                .operatingSystem("Windows 11")
+                .build();
+
+        System.out.println(gamingPC);
+
+        // Создание офисного компьютера
+        Computer officePC = new Computer.Builder("Intel Core i3-12100", 8)
+                .storage(512)
+                .operatingSystem("Windows 11 Pro")
+                .build();
+
+        System.out.println(officePC);
+
+        // Создание бюджетного компьютера (только обязательные параметры)
+        Computer budgetPC = new Computer.Builder("AMD Ryzen 3 3200G", 4)
+                .build();
+
+        System.out.println(budgetPC);
+    }
+
+
+
+    @Test
+    public void checkNotification(){
+        String message = "Привет мир!";
+        PushNotificationFactory pushNotificationFactory = new PushNotificationFactory();
+        Notification notification = pushNotificationFactory.createNotification();
+        notification.send(message);
     }
 }
